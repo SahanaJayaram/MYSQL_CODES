@@ -1,0 +1,52 @@
+MYSQL_CODES
+===========
+#!usr/bin/python
+
+import MySQLdb
+
+# Library is a existing db
+db = MySQLdb.connect("localhost","root","root","library" )
+
+cursor = db.cursor() # objection creation using cursor ()
+
+sql = """CREATE TABLE IF NOT EXISTS student_record3(
+         FIRST_NAME  CHAR(20) NOT NULL,
+		 ID INT,
+		 BRANCH VARCHAR(20),
+		 SEM INT)"""
+
+sql1 = """INSERT INTO student_record3(FIRST_NAME,
+         ID,BRANCH,SEM)
+         VALUES ('SONU', 1,"COMPUTER SCIENCE",2)"""
+
+sql2 = """INSERT INTO student_record3(FIRST_NAME,
+         ID,BRANCH,SEM)
+         VALUES ('SINDHU', 2,"MECHANICAL",1)"""
+
+sql3 = """INSERT INTO student_record3(FIRST_NAME,
+         ID,BRANCH,SEM)
+         VALUES ('SINCHU', 3,"COMPUTER NETWORS",3)"""
+
+
+# UPDATE STATEMENT 
+
+sql4 = """UPDATE student_record3 SET SEM = 4 WHERE ID = 3"""
+
+# DELETE STATEMENT
+
+sql5 = """DELETE FROM student_record3 WHERE BRANCH="MECHANICAL" """
+
+try:
+	cursor.execute(sql)
+	cursor.execute(sql1)
+	cursor.execute(sql2)
+	cursor.execute(sql3)
+	cursor.execute(sql4)
+ 	cursor.execute(sql5)
+
+ 	db.commit() # Changes made
+except:
+  db.rollback() # if error
+
+db.close() # closuing connection
+
