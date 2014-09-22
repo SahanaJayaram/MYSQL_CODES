@@ -1,0 +1,65 @@
+#!usr/bin/python
+import MySQLdb
+from Library_management import*
+
+print "//**********************************//"
+print "    LIBRARY MANGAGEMENT SYSTEM   "
+print  "//**********************************//"
+
+s = student ()
+b = book()
+print "\nMAIN MENU:\n"
+
+while True:
+		print "\n1.Admin\n2.Student\n3.Exit"
+		n=raw_input("Enter your choice:")
+		if n == '1':
+				print "ADMIN MENU"
+				admin = raw_input("enter username:")
+				password = raw_input("\nenter password:\n")
+				if admin!='Admin' or password!='password':
+   	    				print "Unauthorised Access!"
+       					exit()
+
+				else:
+			 			while True:
+	   							print "\nAdmin Particulars\n1.Display Student list\n2.View Book Details\n3.Add Books\n5.Exit\n"
+ 	 							m=raw_input("Enter your choice:")
+ 	  							if m == '1':
+ 			 							s.Display_studentlist()
+ 			 							numrows = int(cursor.rowcount) 
+										result=cursor.fetchall()
+										for record in result:
+        										print record[0],"-->", record[1],"-->",record[2],"-->",record[3],"-->",record[4]
+        										#print record
+
+ 			 					elif m =='2':
+ 			 							b.Display_Books()
+ 			 							numrows = int(cursor.rowcount)
+ 			 							result=cursor.fetchall()
+										for record in result:
+        										print record[0],"-->", record[1],"-->",record[2],"-->",record[3] 
+										#for x in range(0,numrows):
+										    
+
+  								elif m =='3':
+  										b.create_book()
+  										numrows = int(cursor.rowcount)
+ 			 							result=cursor.fetchall()
+										for record in result:
+        										print record[0],"-->", record[1],"-->",record[2],"-->",record[3] 
+  										#print sql1
+  										#s.Add_student()
+  									  
+  								else:
+  								    	break	    
+
+
+		elif n =='2': 			     	    	
+	    		print "***Student MENU***"
+	    		s.Student_details()
+	    		
+ 		else:
+ 				db.close()
+ 				exit()   	
+
